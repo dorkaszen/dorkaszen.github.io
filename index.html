@@ -2,54 +2,110 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>GeoPortal</title>
-  <link rel="stylesheet" href="style.css">
+  <title>GeoMap Ell</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: white;
+    }
+
+    header {
+      background: #111;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    #map {
+      height: 70vh;
+      width: 100%;
+    }
+
+    .panel {
+      padding: 20px;
+      background: #1a1a1a;
+    }
+
+    input {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      padding: 10px;
+      width: 100%;
+      border-radius: 6px;
+      border: none;
+      background: #0d6efd;
+      color: white;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #0b5ed7;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+<header>
+  <div>BHUMI STYLE MAP</div>
+  <div>☰</div>
+</header>
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <h2>PENCARIAN</h2>
+<div id="map"></div>
 
-    <input type="text" placeholder="Cari berdasarkan alamat">
-
-    <div class="dropdown">
-      <label>Provinsi</label>
-      <select>
-        <option>Semua Provinsi</option>
-        <option>DKI Jakarta</option>
-        <option>Jawa Barat</option>
-        <option>Jawa Tengah</option>
-      </select>
-    </div>
-
-    <div class="dropdown">
-      <label>Kabupaten/Kota</label>
-      <select>
-        <option>Semua Kabupaten</option>
-      </select>
-    </div>
-
-    <div class="dropdown">
-      <label>Tahun</label>
-      <select>
-        <option>2024</option>
-        <option>2023</option>
-      </select>
-    </div>
-
-    <button>Cari</button>
-  </div>
-
-  <!-- MAP AREA -->
-  <div class="map-area">
-    <img src="map.jpg" alt="Map">
-  </div>
-
+<div class="panel">
+  <h3>Pencarian Koordinat</h3>
+  <input type="text" id="lat" placeholder="Latitude (contoh: -6.175392)">
+  <input type="text" id="lng" placeholder="Longitude (contoh: 106.827153)">
+  <button onclick="cariKoordinat()">Cari Koordinat</button>
 </div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  var map = L.map('map').setView([-6.200000, 106.816666], 10);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
+
+  var marker;
+
+  function cariKoordinat() {
+    var lat = parseFloat(document.getElementById("lat").value);
+    var lng = parseFloat(document.getElementById("lng").value);
+
+    if (!isNaN(lat) && !isNaN(lng)) {
+      if (marker) {
+        map.removeLayer(marker);
+      }
+
+      marker = L.marker([lat, lng]).addTo(map)
+        .bindPopup("Lokasi ditemukan!").openPopup();
+
+      map.setView([lat, lng], 16);
+    } else {
+      alert("Masukkan koordinat yang valid!");
+    }
+  }
+</script>
 
 </body>
 </html>
