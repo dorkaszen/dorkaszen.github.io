@@ -41,6 +41,8 @@
       width: 100%;
       border-radius: 6px;
       border: none;
+      background: #222;
+      color: white;
     }
 
     button {
@@ -71,8 +73,8 @@
 
 <div class="panel">
   <h3>Pencarian Koordinat</h3>
-  <input type="text" id="lat" placeholder="Latitude (contoh: -6.175392)">
-  <input type="text" id="lng" placeholder="Longitude (contoh: 106.827153)">
+  <input type="text" id="lat" placeholder="Latitude">
+  <input type="text" id="lng" placeholder="Longitude">
   <button onclick="cariKoordinat()">Cari Koordinat</button>
 </div>
 
@@ -80,27 +82,38 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-  var map = L.map('map').setView([-6.200000, 106.816666], 10);
+  // KOORDINAT AWAL LANGSUNG KE CIBATU TIGA
+  var latitude = -6.535878;
+  var longitude = 107.137316;
+
+  var map = L.map('map').setView([latitude, longitude], 17);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap'
   }).addTo(map);
 
-  var marker;
+  var marker = L.marker([latitude, longitude])
+    .addTo(map)
+    .bindPopup("<b>Cibatu Tiga</b><br>Cariu, Bogor, Jawa Barat")
+    .openPopup();
 
   function cariKoordinat() {
     var lat = parseFloat(document.getElementById("lat").value);
     var lng = parseFloat(document.getElementById("lng").value);
 
     if (!isNaN(lat) && !isNaN(lng)) {
+
       if (marker) {
         map.removeLayer(marker);
       }
 
-      marker = L.marker([lat, lng]).addTo(map)
-        .bindPopup("Lokasi ditemukan!").openPopup();
+      marker = L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup("Lokasi ditemukan!")
+        .openPopup();
 
       map.setView([lat, lng], 16);
+
     } else {
       alert("Masukkan koordinat yang valid!");
     }
