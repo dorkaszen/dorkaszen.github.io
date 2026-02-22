@@ -2,9 +2,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>GeoMap Ell</title>
+  <title>Desa Cibatu Tiga Cariu Jonggol</title>
 
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
   <style>
@@ -15,18 +14,8 @@
       color: white;
     }
 
-    header {
-      background: #111;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: bold;
-      font-size: 20px;
-    }
-
     #map {
-      height: 70vh;
+      height: 75vh;
       width: 100%;
     }
 
@@ -36,38 +25,51 @@
     }
 
     input {
-      padding: 10px;
-      margin: 5px 0;
+      padding: 12px;
+      margin: 6px 0;
       width: 100%;
       border-radius: 6px;
       border: none;
       background: #222;
       color: white;
+      font-size: 16px;
     }
 
     button {
-      padding: 10px;
+      padding: 12px;
       width: 100%;
       border-radius: 6px;
       border: none;
       background: #0d6efd;
       color: white;
       cursor: pointer;
-      margin-top: 5px;
+      margin-top: 8px;
+      font-size: 16px;
     }
 
     button:hover {
       background: #0b5ed7;
     }
+
+    /* POPUP DESKTOP */
+    .leaflet-popup-content {
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+
+    /* POPUP HP DIBESARIN BANGET */
+    @media (max-width: 600px) {
+      .leaflet-popup-content {
+        font-size: 24px !important;
+        font-weight: bold;
+      }
+    }
+
   </style>
 </head>
 
 <body>
-
-<header>
-  <div>BHUMI STYLE MAP</div>
-  <div>☰</div>
-</header>
 
 <div id="map"></div>
 
@@ -78,11 +80,9 @@
   <button onclick="cariKoordinat()">Cari Koordinat</button>
 </div>
 
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-  // KOORDINAT AWAL LANGSUNG KE CIBATU TIGA
   var latitude = -6.535878;
   var longitude = 107.137316;
 
