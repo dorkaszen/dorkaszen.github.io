@@ -91,6 +91,17 @@
   font-size:16px;
   font-weight:bold;
 }
+
+.nama-tanah{
+  font-size:22px;
+  font-weight:bold;
+  color:#000;
+  text-align:center;
+  background:rgba(255,255,255,0.8);
+  padding:4px 8px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
     
   </style>
 </head>
@@ -118,23 +129,19 @@
     attribution: '&copy; OpenStreetMap'
   }).addTo(map);
 
-var marker = L.marker([latitude, longitude])
-  .addTo(map)
-  .bindPopup(`
-    <div class="popup-box">
-      <div class="lokasi"> Cibatu Tiga</div>
-      <div class="daerah">Cariu, Bogor, Jawa Barat</div>
+var marker = L.marker([latitude, longitude]).addTo(map);
 
-      <hr>
+// Popup lokasi
+marker.bindPopup("<b>Cibatu Tiga</b><br>Cariu, Bogor, Jawa Barat").openPopup();
 
-      <div class="pemilik">Pemilik Tanah</div>
-      <div class="nama">
-        Sudianto Sunanto<br>
-        Suryati Sunanto
-      </div>
-    </div>
-  `)
-  .openPopup();
+// Label nama pemilik di peta (bukan di popup)
+marker.bindTooltip(
+"<div class='nama-tanah'>Sudianto Sunanto<br>Suryati Sunanto</div>",
+{
+  permanent: true,
+  direction: "top",
+  offset: [0, -10]
+});
 
   function cariKoordinat() {
     var lat = parseFloat(document.getElementById("lat").value);
