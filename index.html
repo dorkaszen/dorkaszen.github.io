@@ -66,23 +66,30 @@
       }
     }
 
-  .popup-owner{
+.popup-box{
   text-align:center;
-  font-family: Arial, sans-serif;
-  padding:5px;
+  font-family: Arial;
 }
 
-.owner-title{
-  font-size:16px;
-  color:#555;
-  margin-bottom:6px;
-}
-
-.owner-name{
+.lokasi{
   font-size:20px;
   font-weight:bold;
-  color:#000;
-  line-height:1.4;
+}
+
+.daerah{
+  font-size:14px;
+  color:#555;
+}
+
+.pemilik{
+  margin-top:6px;
+  font-size:14px;
+  color:#666;
+}
+
+.nama{
+  font-size:16px;
+  font-weight:bold;
 }
     
   </style>
@@ -114,9 +121,14 @@
 var marker = L.marker([latitude, longitude])
   .addTo(map)
   .bindPopup(`
-    <div class="popup-owner">
-      <div class="owner-title">Pemilik Tanah</div>
-      <div class="owner-name">
+    <div class="popup-box">
+      <div class="lokasi">📍 Cibatu Tiga</div>
+      <div class="daerah">Cariu, Bogor, Jawa Barat</div>
+
+      <hr>
+
+      <div class="pemilik">Pemilik Tanah</div>
+      <div class="nama">
         Sudianto Sunanto<br>
         Suryati Sunanto
       </div>
